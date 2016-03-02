@@ -1,0 +1,90 @@
+﻿<Window x:Class="TaskTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskTools"
+        mc:Ignorable="d"
+        Title="Tasks" MinWidth="800" MinHeight="600">
+    <Window.Resources>
+        <DataTemplate x:Key="TaskTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Text}"/>
+                <TextBlock Text="{Binding Workload}"/>
+            </StackPanel>
+        </DataTemplate>
+        <Style TargetType="ListViewItem">
+            <EventSetter Event="MouseDoubleClick" Handler="Task_DoubleClick"/>
+        </Style>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CreateTask}" Modifiers="Ctrl" Key="N"/>
+    </Window.InputBindings>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Right" Background="White" BorderThickness="0" Margin="0,0,10,0"
+                    Command="{Binding CreateTask}">
+                <Image Source="..\Images\file+.png" Height="20" Width="20"/>
+            </Button>
+            <Menu DockPanel.Dock="Left" Background="White">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" Command="{Binding CreateFile}"/>
+                    <MenuItem Header="_Open" Command="{Binding OpenFile}"/>
+                    <MenuItem Header="_Close" Command="{Binding CloseFile}"/>
+                    <MenuItem Header="E_xit" Command="{Binding Exit}"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" Command="{Binding ShowHelp}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <TabControl ItemsSource="{Binding Tabs}" DockPanel.Dock="Top" SelectedIndex="0">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding TabTitle}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Column="0" Grid.Row="0" Header="Money">
+                            <ListView ItemsSource="{Binding Money}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="0" Grid.Row="1" Header="Health">
+                            <ListView ItemsSource="{Binding Health}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="0" Grid.Row="2" Header="Business">
+                            <ListView ItemsSource="{Binding Business}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="0" Grid.Row="3" Header="Fun">
+                            <ListView ItemsSource="{Binding Fun}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Grid.Row="0" Header="Friends&amp;Family">
+                            <ListView ItemsSource="{Binding FnF}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Grid.Row="1" Header="SelfDevelopment">
+                            <ListView ItemsSource="{Binding SelfDevelopment}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Header="Environment">
+                            <ListView ItemsSource="{Binding Environment}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Header="Incoming">
+                            <ListView ItemsSource="{Binding Incoming}" ItemTemplate="{StaticResource TaskTemplate}"/>
+                        </GroupBox>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </DockPanel>
+</Window>
