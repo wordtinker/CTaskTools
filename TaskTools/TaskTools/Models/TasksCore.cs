@@ -53,18 +53,22 @@ namespace TaskTools.Models
 
         internal void UpdateTask(TDTask task)
         {
-            if (storage != null)
+            if (storage == null) return;
+
+            if (task.Id == null)
             {
-                if (task.Id == null)
+                if (storage.SaveTask(task))
                 {
-                    storage.SaveTask(task);
                     Pool.Add(task);
+                    OnPropertyChanged(() => Pool);
                 }
-                else
+            }
+            else
+            {
+                if (storage.UpdateTask(task))
                 {
-                    storage.UpdateTask(task);
+                    OnPropertyChanged(() => Pool);
                 }
-                OnPropertyChanged(() => Pool);
             }
         }
 

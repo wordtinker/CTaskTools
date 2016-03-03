@@ -15,6 +15,15 @@
         </DataTemplate>
         <Style TargetType="ListViewItem">
             <EventSetter Event="MouseDoubleClick" Handler="Task_DoubleClick"/>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Header="Stage" ItemsSource="{Binding Stages}"/>
+                        <Separator/>
+                        <MenuItem Header="Delete"/>
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     <Window.InputBindings>

@@ -37,9 +37,15 @@ namespace TaskTools.ViewModels
                     if (saveFileDialog.ShowDialog() == true)
                     {
                         string fileName = saveFileDialog.FileName;
-                        fileHandler.InitializeFile(fileName);
-                        fileHandler.LoadFile(fileName);
-                        core.Storage = fileHandler;
+                        if (fileHandler.InitializeFile(fileName) &&
+                            fileHandler.LoadFile(fileName))
+                        {
+                            core.Storage = fileHandler;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Can't create file.");
+                        }
                     }
                 }));
             }
@@ -57,8 +63,14 @@ namespace TaskTools.ViewModels
                     openFileDialog.Filter = fileHandler.Extension;
                     if (openFileDialog.ShowDialog() == true)
                     {
-                        fileHandler.LoadFile(openFileDialog.FileName);
-                        core.Storage = fileHandler;
+                        if (fileHandler.LoadFile(openFileDialog.FileName))
+                        {
+                            core.Storage = fileHandler;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Can't open file.");
+                        }
                     }
                 }));
             }

@@ -7,12 +7,12 @@ namespace TaskTools.Data
     {
         public abstract string Extension { get; }
 
-        public abstract void InitializeFile(string fileName);
-        public abstract void LoadFile(string fileName);
+        public abstract bool InitializeFile(string fileName);
+        public abstract bool LoadFile(string fileName);
         public abstract List<TDTask> GetTasks();
         public abstract List<TDTask> GetFinishedTasks();
-        public abstract void SaveTask(TDTask newTask);
-        public abstract void UpdateTask(TDTask task);
+        public abstract bool SaveTask(TDTask newTask);
+        public abstract bool UpdateTask(TDTask task);
         public abstract void DeleteTask(TDTask task); 
     }
 }
