@@ -13,6 +13,8 @@ namespace TaskTools.ViewModels
         private TDTask task;
         private ICommand updateTask;
         private ICommand deleteTask;
+        private ICommand changeState;
+
 
         public string Text { get; set; }
         public DateTime Incoming { get; set; }
@@ -79,6 +81,22 @@ namespace TaskTools.ViewModels
                 (deleteTask = new DelegateCommand(() =>
                 {
                     task.Delete();
+                }));
+            }
+        }
+
+        public ICommand ChangeStage
+        {
+            get
+            {
+                return changeState ??
+                (changeState = new DelegateCommand<object>((obj) => 
+                {
+                    if (obj is Stage)
+                    {
+                        task.Stage = (Stage)obj;
+                        task.Update();
+                    }
                 }));
             }
         }

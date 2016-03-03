@@ -13,12 +13,18 @@
                 <TextBlock Text="{Binding Workload}"/>
             </StackPanel>
         </DataTemplate>
+        <Style x:Key="StageCommands" TargetType="MenuItem">
+            <Setter Property="Command" Value="{Binding DataContext.ChangeStage,
+                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}"/>
+            <Setter Property="CommandParameter" Value="{Binding}"/>
+        </Style>
         <Style TargetType="ListViewItem">
             <EventSetter Event="MouseDoubleClick" Handler="Task_DoubleClick"/>
             <Setter Property="ContextMenu">
                 <Setter.Value>
                     <ContextMenu>
-                        <MenuItem Header="Stage" ItemsSource="{Binding Stages}"/>
+                        <MenuItem Header="Stage" ItemsSource="{Binding Stages}"
+                                  ItemContainerStyle="{StaticResource StageCommands}"/>
                         <Separator/>
                         <MenuItem Header="Delete" Command="{Binding DeleteTask}"/>
                     </ContextMenu>
