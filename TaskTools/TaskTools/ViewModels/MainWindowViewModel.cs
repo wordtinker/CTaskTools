@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
+using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -8,10 +9,11 @@ using TaskTools.Models;
 
 namespace TaskTools.ViewModels
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : BindableBase
     {
         private IWindowFactory windowFactory;
         private TasksCore core;
+        private string openedFile;
         private ICommand createFile;
         private ICommand openFile;
         private ICommand closeFile;
@@ -19,8 +21,15 @@ namespace TaskTools.ViewModels
         private ICommand showHelp;
         private ICommand createTask;
         
-
         public List<TaskPanel> Tabs { get; private set; }
+        public string OpenedFile
+        {
+            get { return openedFile; }
+            set
+            {
+                SetProperty(ref openedFile, value);
+            }
+        }
 
         public ICommand CreateFile
         {
@@ -141,12 +150,14 @@ namespace TaskTools.ViewModels
                 if (fileHandler.LoadFile(fileName))
                 {
                     core.Storage = fileHandler;
+                    OpenedFile = fileName;
                 }
             }
         }
 
         public void SaveLastOpenedFile(string fileName)
         {
+            OpenedFile = fileName;
             Config.AddUpdateConfig("LastFile", fileName);
         }
 

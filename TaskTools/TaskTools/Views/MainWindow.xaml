@@ -36,6 +36,9 @@
         <KeyBinding Command="{Binding CreateTask}" Modifiers="Ctrl" Key="N"/>
     </Window.InputBindings>
     <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding OpenedFile}"/>
+        </StatusBar>
         <DockPanel DockPanel.Dock="Top">
             <Button DockPanel.Dock="Right" Background="White" BorderThickness="0" Margin="0,0,10,0"
                     Command="{Binding CreateTask}">
