@@ -95,16 +95,21 @@ namespace TaskTools.Data
             }
         }
 
+        private XElement GetElementById(int id)
+        {
+            XElement selectedElem =
+                (from t in xDoc.Root.Element("Tasks").Elements("TDTask").Elements("Id")
+                 where t.Value == id.ToString()
+                 select t.Parent).FirstOrDefault();
+            return selectedElem;
+        }
+
         public override bool UpdateTask(TDTask task)
         {
             try
             {
-                XElement selectedElem =
-                (from t in xDoc.Root.Element("Tasks").Elements("TDTask").Elements("Id")
-                 where t.Value == task.Id.ToString()
-                 select t.Parent).FirstOrDefault();
+                XElement selectedElem = GetElementById(task.Id.GetValueOrDefault());
                 selectedElem.ReplaceWith(task.ToXElement<TDTask>());
-
                 xDoc.Save(fileName);
                 return true;
             }
@@ -114,10 +119,19 @@ namespace TaskTools.Data
             }
         }
 
-        public override void DeleteTask(TDTask task)
+        public override bool DeleteTask(TDTask task)
         {
-            // TODO
-            throw new NotImplementedException();
+            try
+            {
+                XElement selectedElem = GetElementById(task.Id.GetValueOrDefault());
+                selectedElem.Remove();
+                xDoc.Save(fileName);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

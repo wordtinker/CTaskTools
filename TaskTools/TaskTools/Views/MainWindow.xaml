@@ -20,7 +20,7 @@
                     <ContextMenu>
                         <MenuItem Header="Stage" ItemsSource="{Binding Stages}"/>
                         <Separator/>
-                        <MenuItem Header="Delete"/>
+                        <MenuItem Header="Delete" Command="{Binding DeleteTask}"/>
                     </ContextMenu>
                 </Setter.Value>
             </Setter>

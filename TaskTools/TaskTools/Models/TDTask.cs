@@ -42,5 +42,10 @@ namespace TaskTools.Models
         {
             TasksCore.Instance.UpdateTask(this);
         }
+
+        internal void Delete()
+        {
+            TasksCore.Instance.DeleteTask(this);
+        }
     }
 }

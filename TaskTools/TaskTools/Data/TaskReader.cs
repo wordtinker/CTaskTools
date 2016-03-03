@@ -13,6 +13,6 @@ namespace TaskTools.Data
         public abstract List<TDTask> GetFinishedTasks();
         public abstract bool SaveTask(TDTask newTask);
         public abstract bool UpdateTask(TDTask task);
-        public abstract void DeleteTask(TDTask task); 
+        public abstract bool DeleteTask(TDTask task); 
     }
 }

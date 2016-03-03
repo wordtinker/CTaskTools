@@ -72,6 +72,15 @@ namespace TaskTools.Models
             }
         }
 
+        internal void DeleteTask(TDTask task)
+        {
+            if (storage.DeleteTask(task))
+            {
+                Pool.Remove(task);
+                OnPropertyChanged(() => Pool);
+            }
+        }
+
         private TasksCore()
         {
             Pool = new List<TDTask>();
