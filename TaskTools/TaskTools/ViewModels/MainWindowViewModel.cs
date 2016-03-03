@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -40,6 +39,7 @@ namespace TaskTools.ViewModels
                         if (fileHandler.InitializeFile(fileName) &&
                             fileHandler.LoadFile(fileName))
                         {
+                            SaveLastOpenedFile(fileName);
                             core.Storage = fileHandler;
                         }
                         else
@@ -55,7 +55,7 @@ namespace TaskTools.ViewModels
             get
             {
                 return openFile ??
-                    (openFile = new DelegateCommand(() =>
+                (openFile = new DelegateCommand(() =>
                 {
                     TaskReader fileHandler = new XMLTaskReader();
 
@@ -65,6 +65,7 @@ namespace TaskTools.ViewModels
                     {
                         if (fileHandler.LoadFile(openFileDialog.FileName))
                         {
+                            SaveLastOpenedFile(openFileDialog.FileName);
                             core.Storage = fileHandler;
                         }
                         else
@@ -82,6 +83,7 @@ namespace TaskTools.ViewModels
                 return closeFile ??
                 (closeFile = new DelegateCommand(() =>
                 {
+                    SaveLastOpenedFile(string.Empty);
                     core.Storage = null;
                 }));
             }
@@ -130,6 +132,24 @@ namespace TaskTools.ViewModels
             windowFactory.CreateEditor(taskViewModel);
         }
 
+        public void LoadLastOpenedFile()
+        {
+            string fileName = Config.ReadSetting("LastFile");
+            if (fileName != string.Empty)
+            {
+                TaskReader fileHandler = new XMLTaskReader();
+                if (fileHandler.LoadFile(fileName))
+                {
+                    core.Storage = fileHandler;
+                }
+            }
+        }
+
+        public void SaveLastOpenedFile(string fileName)
+        {
+            Config.AddUpdateConfig("LastFile", fileName);
+        }
+
         public MainWindowViewModel(IWindowFactory windowFactory)
         {
             this.windowFactory = windowFactory;
@@ -141,6 +161,7 @@ namespace TaskTools.ViewModels
                 new Waiting(core),
                 new Someday(core)
             };
+            LoadLastOpenedFile();
         }
     }
 }
