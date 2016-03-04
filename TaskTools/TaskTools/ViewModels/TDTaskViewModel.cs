@@ -13,6 +13,7 @@ namespace TaskTools.ViewModels
         private ICommand updateTask;
         private ICommand deleteTask;
         private ICommand changeState;
+        private ICommand tickTask;
 
 
         public string Text { get; set; }
@@ -96,6 +97,26 @@ namespace TaskTools.ViewModels
                         task.Stage = (Stage)obj;
                         task.Update();
                     }
+                }));
+            }
+        }
+
+        public ICommand TickTask
+        {
+            get
+            {
+                return tickTask ??
+                (tickTask = new DelegateCommand(() =>
+                {
+                    task.Completed = true;
+                    task.Stage = Stage.Today;
+                    task.Finish = DateTime.Now;
+                    task.Update();
+                },
+                () =>
+                {
+                    // TODO
+                    return true;
                 }));
             }
         }

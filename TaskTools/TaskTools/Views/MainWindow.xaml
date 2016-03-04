@@ -7,11 +7,20 @@
         mc:Ignorable="d"
         Title="Tasks" MinWidth="800" MinHeight="600">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:BrushColorConverter x:Key="ColorConverter"/>
         <DataTemplate x:Key="TaskTemplate">
-            <StackPanel>
-                <TextBlock Text="{Binding Text}"/>
-                <TextBlock Text="{Binding Workload}"/>
-            </StackPanel>
+            <DockPanel Background="{Binding Completed, Converter={StaticResource ColorConverter}}">
+                <Button DockPanel.Dock="Left" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
+                    Command="{Binding TickTask}">
+                    <Image Source="..\Images\checkboxes.png" Height="16" Width="16"/>
+                </Button>
+                <TextBlock DockPanel.Dock="Left" Text="{Binding Text}"/>
+                <TextBlock DockPanel.Dock="Left" Text="&lt;"/>
+                <TextBlock DockPanel.Dock="Left" Text="{Binding Workload}"/>
+                <TextBlock DockPanel.Dock="Left" Text="&gt;"/>
+                <TextBlock DockPanel.Dock="Left" Text="R" Visibility="{Binding Routine, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </DockPanel>
         </DataTemplate>
         <Style x:Key="StageCommands" TargetType="MenuItem">
             <Setter Property="Command" Value="{Binding DataContext.ChangeStage,
@@ -19,6 +28,7 @@
             <Setter Property="CommandParameter" Value="{Binding}"/>
         </Style>
         <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <EventSetter Event="MouseDoubleClick" Handler="Task_DoubleClick"/>
             <Setter Property="ContextMenu">
                 <Setter.Value>
@@ -36,11 +46,11 @@
         <KeyBinding Command="{Binding CreateTask}" Modifiers="Ctrl" Key="N"/>
     </Window.InputBindings>
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar DockPanel.Dock="Bottom" Background="White">
             <TextBlock Text="{Binding OpenedFile}"/>
         </StatusBar>
         <DockPanel DockPanel.Dock="Top">
-            <Button DockPanel.Dock="Right" Background="White" BorderThickness="0" Margin="0,0,10,0"
+            <Button DockPanel.Dock="Right" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
                     Command="{Binding CreateTask}">
                 <Image Source="..\Images\file+.png" Height="20" Width="20"/>
             </Button>

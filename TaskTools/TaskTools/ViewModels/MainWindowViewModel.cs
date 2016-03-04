@@ -130,9 +130,8 @@ namespace TaskTools.ViewModels
                     windowFactory.CreateEditor();
                 }, () =>
                 {
-                    // TODO fix button
-                    return core.Storage != null;
-                }));
+                    return !string.IsNullOrEmpty(OpenedFile);
+                }).ObservesProperty(() => OpenedFile));
             }
         }
 
