@@ -64,12 +64,7 @@ namespace TaskTools.ViewModels
                     task.Workload = Workload;
 
                     task.Update();
-                }, () =>
-                {
-                    // TODO
-                    return true;
-                }
-                ));
+                }));
             }
         }
 
@@ -112,11 +107,6 @@ namespace TaskTools.ViewModels
                     task.Stage = Stage.Today;
                     task.Finish = DateTime.Now;
                     task.Update();
-                },
-                () =>
-                {
-                    // TODO
-                    return true;
                 }));
             }
         }

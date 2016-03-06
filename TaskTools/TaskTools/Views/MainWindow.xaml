@@ -51,7 +51,8 @@
         </StatusBar>
         <DockPanel DockPanel.Dock="Top">
             <Button DockPanel.Dock="Right" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
-                    Command="{Binding CreateTask}">
+                    Command="{Binding CreateTask}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter},
+                RelativeSource={RelativeSource Self}}">
                 <Image Source="..\Images\file+.png" Height="20" Width="20"/>
             </Button>
             <Menu DockPanel.Dock="Left" Background="White">
