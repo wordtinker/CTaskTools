@@ -20,6 +20,8 @@ namespace TaskTools.ViewModels
         private ICommand exit;
         private ICommand showHelp;
         private ICommand createTask;
+        private ICommand dropFinished;
+        private ICommand showFinished;
         
         public List<TaskPanel> Tabs { get; private set; }
         public string OpenedFile
@@ -132,6 +134,31 @@ namespace TaskTools.ViewModels
                 {
                     return !string.IsNullOrEmpty(OpenedFile);
                 }).ObservesProperty(() => OpenedFile));
+            }
+        }
+
+        public ICommand DropFinished
+        {
+            get
+            {
+                return dropFinished ??
+                (dropFinished = new DelegateCommand<string>((day) =>
+                {
+                    // TODO
+                    MessageBox.Show(day);
+                }));
+            }
+        }
+
+        public ICommand ShowFinished
+        {
+            get
+            {
+                return showFinished ??
+                (showFinished = new DelegateCommand(() =>
+                {
+                    // TODO
+                }));
             }
         }
 

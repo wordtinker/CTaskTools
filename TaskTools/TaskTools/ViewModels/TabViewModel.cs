@@ -97,7 +97,6 @@ namespace TaskTools.ViewModels
 
         protected override IEnumerable<TDTaskViewModel> SelectForCategory(Category cat)
         {
-            // TODO test all variants
             IEnumerable<TDTaskViewModel> tasks =
                     from t in core.Pool
                     where t.Category == cat &&

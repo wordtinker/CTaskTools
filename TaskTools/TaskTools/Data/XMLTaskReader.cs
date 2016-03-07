@@ -22,17 +22,30 @@ namespace TaskTools.Data
 
         public override List<TDTask> GetFinishedTasks()
         {
-            // TODO
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<TDTask> tasks =
+                    xDoc.Root.Element("Tasks").Elements("TDTask")
+                    .Select(t => t.FromXElement<TDTask>())
+                    .Where(t => t.Completed == true ||
+                           t.Due?.Date < DateTime.Today);
+                return tasks.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<TDTask>();
+            }
         }
 
         public override List<TDTask> GetTasks()
         {
-            // TODO make it actual
             try
             {
-                IEnumerable<XElement> elements = xDoc.Root.Element("Tasks").Elements("TDTask");
-                IEnumerable<TDTask> tasks = elements.Select(p => p.FromXElement<TDTask>());
+                IEnumerable<TDTask> tasks =
+                    xDoc.Root.Element("Tasks").Elements("TDTask")
+                    .Select(t => t.FromXElement<TDTask>())
+                    .Where(t => (t.Completed == false && (t.Due?.Date >= DateTime.Today || t.Due == null)) ||
+                                (t.Finish?.Date == DateTime.Today));
                 return tasks.ToList();
             }
             catch (Exception)

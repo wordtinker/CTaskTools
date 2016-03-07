@@ -67,6 +67,13 @@
                     <MenuItem Header="_Close" Command="{Binding CloseFile}"/>
                     <MenuItem Header="E_xit" Command="{Binding Exit}"/>
                 </MenuItem>
+                <MenuItem Header="Finished">
+                    <MenuItem Header="Delete Week" Command="{Binding DropFinished}" CommandParameter="Week"/>
+                    <MenuItem Header="Delete Month" Command="{Binding DropFinished}" CommandParameter="Month"/>
+                    <MenuItem Header="Delete All" Command="{Binding DropFinished}"/>
+                    <Separator/>
+                    <MenuItem Header="View" Command="{Binding ShowFinished}"/>
+                </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_About" Command="{Binding ShowHelp}"/>
                 </MenuItem>
