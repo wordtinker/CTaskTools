@@ -1,6 +1,8 @@
 ﻿using Prism.Mvvm;
 using System.Collections.Generic;
 using TaskTools.Data;
+using System;
+using System.Linq;
 
 namespace TaskTools.Models
 {
@@ -9,7 +11,7 @@ namespace TaskTools.Models
 
         private static readonly TasksCore instance = new TasksCore();
         private TaskReader storage;
-        
+
         public static TasksCore Instance
         {
             get
@@ -22,6 +24,7 @@ namespace TaskTools.Models
         /// Pool of ToDo Items with valid date starting from Today.
         /// </summary>
         public List<TDTask> Pool { get; private set; }
+        public List<TDTask> FinishedPool { get; private set; }
         public TaskReader Storage
         {
             get
@@ -40,8 +43,13 @@ namespace TaskTools.Models
                     {
                         Pool.Add(task);
                     }
+                    foreach (TDTask task in storage.GetFinishedTasks())
+                    {
+                        FinishedPool.Add(task);
+                    }
                 }
                 OnPropertyChanged(() => Pool);
+                OnPropertyChanged(() => FinishedPool);
             }
         }
 
@@ -75,9 +83,27 @@ namespace TaskTools.Models
             }
         }
 
+        internal void DeleteTasksUpTo(DateTime day)
+        {
+            var obsoleteTasks =
+                (from t in FinishedPool
+                where t.Finish <= day ||
+                      t.ValidTill <= day
+                 select t).ToList();
+            obsoleteTasks.ForEach(task =>
+            {
+                if (storage.DeleteTask(task))
+                {
+                    FinishedPool.Remove(task);
+                    OnPropertyChanged(() => FinishedPool);
+                }
+            });
+        }
+
         private TasksCore()
         {
             Pool = new List<TDTask>();
+            FinishedPool = new List<TDTask>();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace TaskTools.Data
                     xDoc.Root.Element("Tasks").Elements("TDTask")
                     .Select(t => t.FromXElement<TDTask>())
                     .Where(t => t.Completed == true ||
-                           t.Due?.Date < DateTime.Today);
+                           t.ValidTill?.Date < DateTime.Today);
                 return tasks.ToList();
             }
             catch (Exception)
@@ -44,7 +44,7 @@ namespace TaskTools.Data
                 IEnumerable<TDTask> tasks =
                     xDoc.Root.Element("Tasks").Elements("TDTask")
                     .Select(t => t.FromXElement<TDTask>())
-                    .Where(t => (t.Completed == false && (t.Due?.Date >= DateTime.Today || t.Due == null)) ||
+                    .Where(t => (t.Completed == false && (t.ValidTill?.Date >= DateTime.Today || t.ValidTill == null)) ||
                                 (t.Finish?.Date == DateTime.Today));
                 return tasks.ToList();
             }

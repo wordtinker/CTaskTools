@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -144,8 +145,24 @@ namespace TaskTools.ViewModels
                 return dropFinished ??
                 (dropFinished = new DelegateCommand<string>((day) =>
                 {
-                    // TODO
-                    MessageBox.Show(day);
+                    DateTime today = DateTime.Today;
+                    switch (day)
+                    {
+                        case "Week":
+                            int shift = today.DayOfWeek == 0 ? 7 : (int)today.DayOfWeek;
+                            DateTime lastSunday = today.AddDays(-shift);
+                            core.DeleteTasksUpTo(lastSunday);
+                            break;
+                        case "Month":
+                            DateTime currMonth = new DateTime(today.Year, today.Month, 1);
+                            DateTime lastDay = currMonth.AddDays(-1);
+                            core.DeleteTasksUpTo(lastDay);
+                            break;
+                        default:
+                            DateTime yesterday = today.AddDays(-1);
+                            core.DeleteTasksUpTo(yesterday);
+                            break;
+                    }
                 }));
             }
         }
@@ -157,7 +174,8 @@ namespace TaskTools.ViewModels
                 return showFinished ??
                 (showFinished = new DelegateCommand(() =>
                 {
-                    // TODO
+                    MessageBox.Show(string.Format("There are {0} finished tasks.",
+                        core.FinishedPool.Count));
                 }));
             }
         }
