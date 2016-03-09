@@ -211,10 +211,10 @@ namespace TaskTools.ViewModels
             core = TasksCore.Instance;
             Tabs = new List<TaskPanel>
             {
-                new TodayTasks(core),
-                new Backlog(core),
-                new Waiting(core),
-                new Someday(core)
+                new TodayTasks(),
+                new Backlog(),
+                new Waiting(),
+                new Someday()
             };
             LoadLastOpenedFile();
         }

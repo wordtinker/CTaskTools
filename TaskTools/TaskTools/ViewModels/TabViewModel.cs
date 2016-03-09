@@ -73,9 +73,9 @@ namespace TaskTools.ViewModels
             }
         }
 
-        public TaskPanel(TasksCore core)
+        public TaskPanel()
         {
-            this.core = core;
+            this.core = TasksCore.Instance;
             this.core.PropertyChanged += (sender, e) =>
             {
                 // Raise every property
@@ -88,7 +88,7 @@ namespace TaskTools.ViewModels
 
     internal class TodayTasks : TaskPanel
     {
-        public TodayTasks(TasksCore core ) : base(core) {/* empty */ }
+        public TodayTasks() : base() {/* empty */ }
 
         public override string TabTitle
         {
@@ -111,7 +111,7 @@ namespace TaskTools.ViewModels
 
     internal class Backlog : TaskPanel
     {
-        public Backlog(TasksCore core) : base(core) {/* Empty */}
+        public Backlog() : base() {/* Empty */}
 
         public override string TabTitle
         {
@@ -131,7 +131,7 @@ namespace TaskTools.ViewModels
 
     internal class Someday : TaskPanel
     {
-        public Someday(TasksCore core) : base(core) {/* Empty */}
+        public Someday() : base() {/* Empty */}
 
         public override string TabTitle
         {
@@ -151,7 +151,7 @@ namespace TaskTools.ViewModels
 
     internal class Waiting : TaskPanel
     {
-        public Waiting(TasksCore core) : base(core) {/* Empty */}
+        public Waiting() : base() {/* Empty */}
 
         public override string TabTitle
         {
