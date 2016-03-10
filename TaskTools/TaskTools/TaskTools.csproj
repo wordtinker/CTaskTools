@@ -61,6 +61,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
+    <Compile Include="Models\Routine.cs" />
+    <Compile Include="ViewModels\RoutineListViewModel.cs" />
+    <Compile Include="ViewModels\RoutineViewModel.cs" />
+    <Compile Include="Views\RoutineList.xaml.cs">
+      <DependentUpon>RoutineList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoutineWindow.xaml.cs">
+      <DependentUpon>RoutineWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TaskWindow.xaml.cs">
       <DependentUpon>TaskWindow.xaml</DependentUpon>
     </Compile>
@@ -85,6 +94,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\RoutineList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoutineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TaskWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

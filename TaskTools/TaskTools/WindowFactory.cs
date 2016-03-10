@@ -7,6 +7,7 @@ namespace TaskTools
     {
         void CreateEditor();
         void CreateEditor(TDTaskViewModel taskVM);
+        void CreateRoutineList();
     }
 
     class WindowFactory : IWindowFactory
@@ -28,6 +29,13 @@ namespace TaskTools
         {
             TaskWindow window = new TaskWindow();
             window.DataContext = taskVM;
+            window.Owner = mainWindow;
+            window.Show();
+        }
+
+        public void CreateRoutineList()
+        {
+            RoutineList window = new RoutineList();
             window.Owner = mainWindow;
             window.Show();
         }

@@ -23,6 +23,7 @@ namespace TaskTools.ViewModels
         private ICommand createTask;
         private ICommand dropFinished;
         private ICommand showFinished;
+        private ICommand showRoutineList;
         
         public List<TaskPanel> Tabs { get; private set; }
         public string OpenedFile
@@ -176,6 +177,18 @@ namespace TaskTools.ViewModels
                 {
                     MessageBox.Show(string.Format("There are {0} finished tasks.",
                         core.FinishedPool.Count));
+                }));
+            }
+        }
+
+        public ICommand ShowRoutineList
+        {
+            get
+            {
+                return showRoutineList ??
+                (showRoutineList = new DelegateCommand(() =>
+                {
+                    windowFactory.CreateRoutineList();
                 }));
             }
         }

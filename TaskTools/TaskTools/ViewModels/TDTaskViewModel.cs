@@ -32,6 +32,7 @@ namespace TaskTools.ViewModels
         {
             get
             {
+                // TODO fix
                 return Enum.GetValues(typeof(Category)).Cast<Category>();
             }
         }
@@ -40,6 +41,7 @@ namespace TaskTools.ViewModels
         {
             get
             {
+                // TODO fix
                 return Enum.GetValues(typeof(Stage)).Cast<Stage>();
             }
         }

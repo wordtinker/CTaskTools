@@ -1,0 +1,43 @@
+﻿<Window x:Class="TaskTools.Views.RoutineWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskTools.Views"
+        mc:Ignorable="d"
+        Title="Routine" Height="300" Width="300">
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">Workload:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Workload}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0">Category:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Category}" ItemsSource="{Binding Categories}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0">Stage:</TextBlock>
+            <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Stage}" ItemsSource="{Binding Stages}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0">Repeat every:</TextBlock>
+            <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Repeated}" ItemsSource="{Binding RepeatTypes}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0">Due:</TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DueShift}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0">Valid:</TextBlock>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ValidShift}"/>
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="OK" Command="{Binding UpdateRoutine}" Click="Close_OnClick"/>
+                <Button Content="Cancel" Click="Close_OnClick"/>
+            </StackPanel>
+        </Grid>
+        <TextBox DockPanel.Dock="Top" Text="{Binding Text}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </DockPanel>
+</Window>

@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Tasks" MinWidth="800" MinHeight="600">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <local:BrushColorConverter x:Key="ColorConverter"/>
         <DataTemplate x:Key="TaskTemplate">
             <DockPanel Background="{Binding Completed, Converter={StaticResource ColorConverter}}">
@@ -73,6 +72,9 @@
                     <MenuItem Header="Delete All" Command="{Binding DropFinished}"/>
                     <Separator/>
                     <MenuItem Header="View" Command="{Binding ShowFinished}"/>
+                </MenuItem>
+                <MenuItem Header="Routines">
+                    <MenuItem Header="Routine List" Command="{Binding ShowRoutineList}"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_About" Command="{Binding ShowHelp}"/>

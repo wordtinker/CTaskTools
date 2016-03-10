@@ -11,6 +11,7 @@ namespace TaskTools.Data
         private string fileName;
         private XDocument xDoc;
         private int lastId;
+        private int lastRoutineId;
 
         public override string Extension
         {
@@ -61,7 +62,9 @@ namespace TaskTools.Data
                 XDocument tree = new XDocument(
                     new XElement("Root",
                         new XElement("LastId", 0),
-                        new XElement("Tasks")
+                        new XElement("RoutineId", 0),
+                        new XElement("Tasks"),
+                        new XElement("Routines")
                         )
                     );
                 tree.Save(fileName);
@@ -80,6 +83,7 @@ namespace TaskTools.Data
                 this.fileName = fileName;
                 xDoc = XDocument.Load(fileName);
                 lastId = int.Parse(xDoc.Root.Element("LastId").Value);
+                lastRoutineId = int.Parse(xDoc.Root.Element("RoutineId").Value);
                 return true;
             }
             catch (Exception)
@@ -108,7 +112,7 @@ namespace TaskTools.Data
             }
         }
 
-        private XElement GetElementById(int id)
+        private XElement GetTaskElementById(int id)
         {
             XElement selectedElem =
                 (from t in xDoc.Root.Element("Tasks").Elements("TDTask").Elements("Id")
@@ -121,7 +125,7 @@ namespace TaskTools.Data
         {
             try
             {
-                XElement selectedElem = GetElementById(task.Id.GetValueOrDefault());
+                XElement selectedElem = GetTaskElementById(task.Id.GetValueOrDefault());
                 selectedElem.ReplaceWith(task.ToXElement<TDTask>());
                 xDoc.Save(fileName);
                 return true;
@@ -136,7 +140,7 @@ namespace TaskTools.Data
         {
             try
             {
-                XElement selectedElem = GetElementById(task.Id.GetValueOrDefault());
+                XElement selectedElem = GetTaskElementById(task.Id.GetValueOrDefault());
                 selectedElem.Remove();
                 xDoc.Save(fileName);
                 return true;
@@ -145,6 +149,54 @@ namespace TaskTools.Data
             {
                 return false;
             }
+        }
+
+        public override List<Routine> GetRoutines()
+        {
+            // TODO test
+            try
+            {
+                IEnumerable<Routine> routines =
+                    xDoc.Root.Element("Routines").Elements("Routine")
+                    .Select(t => t.FromXElement<Routine>());
+                return routines.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<Routine>();
+            }
+        }
+
+        public override bool SaveRoutine(Routine newRoutine)
+        {
+            try
+            {
+                lastRoutineId++;
+                newRoutine.Id = lastRoutineId;
+                xDoc.Root.Element("RoutineId").SetValue(lastRoutineId);
+
+                XElement elem = newRoutine.ToXElement<Routine>();
+                xDoc.Root.Element("Routines").Add(elem);
+
+                xDoc.Save(fileName);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public override bool UpdateRoutine(Routine routine)
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
+        public override bool DeleteRoutine(Routine routine)
+        {
+            // TODO
+            throw new NotImplementedException();
         }
     }
 }

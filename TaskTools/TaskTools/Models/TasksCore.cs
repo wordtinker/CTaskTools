@@ -25,6 +25,7 @@ namespace TaskTools.Models
         /// </summary>
         public List<TDTask> Pool { get; private set; }
         public List<TDTask> FinishedPool { get; private set; }
+        public List<Routine> Routines { get; private set; }
         public TaskReader Storage
         {
             get
@@ -47,9 +48,14 @@ namespace TaskTools.Models
                     {
                         FinishedPool.Add(task);
                     }
+                    foreach (Routine item in storage.GetRoutines())
+                    {
+                        Routines.Add(item);
+                    }
                 }
                 OnPropertyChanged(() => Pool);
                 OnPropertyChanged(() => FinishedPool);
+                OnPropertyChanged(() => Routines);
             }
         }
 
@@ -76,6 +82,8 @@ namespace TaskTools.Models
 
         internal void DeleteTask(TDTask task)
         {
+            if (storage == null) return;
+
             if (storage.DeleteTask(task))
             {
                 Pool.Remove(task);
@@ -85,6 +93,8 @@ namespace TaskTools.Models
 
         internal void DeleteTasksUpTo(DateTime day)
         {
+            if (storage == null) return;
+
             var obsoleteTasks =
                 (from t in FinishedPool
                 where t.Finish <= day ||
@@ -100,10 +110,32 @@ namespace TaskTools.Models
             });
         }
 
+        internal void UpdateRoutine(Routine routine)
+        {
+            if (storage == null) return;
+
+            if (routine.Id == null)
+            {
+                if (storage.SaveRoutine(routine))
+                {
+                    Routines.Add(routine);
+                    OnPropertyChanged(() => Routines);
+                }
+            }
+            else
+            {
+                if (storage.UpdateRoutine(routine))
+                {
+                    OnPropertyChanged(() => Routines);
+                }
+            }
+        }
+
         private TasksCore()
         {
             Pool = new List<TDTask>();
             FinishedPool = new List<TDTask>();
+            Routines = new List<Routine>();
         }
     }
 }

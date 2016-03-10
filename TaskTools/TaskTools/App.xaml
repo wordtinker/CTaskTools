@@ -5,5 +5,6 @@
              xmlns:localVM="clr-namespace:TaskTools.ViewModels"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Application.Resources>
 </Application>
