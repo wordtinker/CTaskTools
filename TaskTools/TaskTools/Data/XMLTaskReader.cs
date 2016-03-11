@@ -212,8 +212,17 @@ namespace TaskTools.Data
 
         public override bool DeleteRoutine(Routine routine)
         {
-            // TODO
-            throw new NotImplementedException();
+            try
+            {
+                XElement selectedElem = GetRoutineElementById(routine.Id.GetValueOrDefault());
+                selectedElem.Remove();
+                xDoc.Save(fileName);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

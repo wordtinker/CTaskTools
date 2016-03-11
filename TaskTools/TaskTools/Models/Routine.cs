@@ -46,6 +46,11 @@ namespace TaskTools.Models
             TasksCore.Instance.UpdateRoutine(this);
         }
 
+        internal void Delete()
+        {
+            TasksCore.Instance.DeleteRoutine(this);
+        }
+
         public void Evaluate()
         {
             DateTime now = DateTime.Now;

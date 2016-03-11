@@ -131,6 +131,17 @@ namespace TaskTools.Models
             }
         }
 
+        internal void DeleteRoutine(Routine routine)
+        {
+            if (storage == null) return;
+
+            if (storage.DeleteRoutine(routine))
+            {
+                Routines.Remove(routine);
+                OnPropertyChanged(() => Routines);
+            }
+        }
+
         private TasksCore()
         {
             Pool = new List<TDTask>();

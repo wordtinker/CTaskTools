@@ -11,6 +11,7 @@ namespace TaskTools.ViewModels
     {
         private Routine routine;
         private ICommand updateRoutine;
+        private ICommand deleteRoutine;
 
         public string Text { get; set; }
         public int Workload { get; set; }
@@ -63,6 +64,18 @@ namespace TaskTools.ViewModels
                     routine.ValidShift = ValidShift;
 
                     routine.Update();
+                }));
+            }
+        }
+
+        public ICommand DeleteRoutine
+        {
+            get
+            {
+                return deleteRoutine ??
+                (deleteRoutine = new DelegateCommand(() =>
+                {
+                    routine.Delete();
                 }));
             }
         }
