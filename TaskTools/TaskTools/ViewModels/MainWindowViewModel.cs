@@ -195,7 +195,7 @@ namespace TaskTools.ViewModels
 
         public void EditTask(TDTaskViewModel taskViewModel)
         {
-            windowFactory.CreateEditor(taskViewModel);
+            windowFactory.CreateEditor(new TDTaskViewModel(taskViewModel));
         }
 
         public void LoadLastOpenedFile()

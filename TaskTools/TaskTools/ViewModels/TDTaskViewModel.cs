@@ -121,6 +121,9 @@ namespace TaskTools.ViewModels
         })
         {/* Empty */}
 
+        public TDTaskViewModel(TDTaskViewModel taskVM) : this(taskVM.task)
+        {/* Empty */}
+
         public TDTaskViewModel(TDTask task)
         {
             this.task = task;

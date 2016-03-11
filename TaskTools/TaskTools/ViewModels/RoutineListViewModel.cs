@@ -38,7 +38,7 @@ namespace TaskTools.ViewModels
         {
             // TODO Fix. MVVM break.
             Views.RoutineWindow window = new Views.RoutineWindow();
-            window.DataContext = routineVM;
+            window.DataContext = new RoutineViewModel(routineVM);
             window.Show();
         }
 

@@ -86,7 +86,10 @@ namespace TaskTools.ViewModels
             Stage = Stage.Today,
             Repeated = RepeatType.Day
         })
-        { /* Empty */}
+        {/* Empty */}
+
+        public RoutineViewModel(RoutineViewModel routineVM) : this(routineVM.routine)
+        {/* Empty */}
 
         public RoutineViewModel(Routine routine)
         {
