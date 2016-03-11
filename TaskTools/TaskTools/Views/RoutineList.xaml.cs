@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using TaskTools.ViewModels;
 
 namespace TaskTools.Views
 {
@@ -10,6 +12,17 @@ namespace TaskTools.Views
         public RoutineList()
         {
             InitializeComponent();
+        }
+
+        public void Routine_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            if (row != null)
+            {
+                RoutineViewModel routineVM = (RoutineViewModel)row.DataContext;
+                RoutineListViewModel listVM = (RoutineListViewModel)DataContext;
+                listVM.EditRoutine(routineVM);
+            }
         }
     }
 }

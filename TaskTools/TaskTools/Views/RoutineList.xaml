@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskTools.Views"
         xmlns:localVM="clr-namespace:TaskTools.ViewModels"
         mc:Ignorable="d"
-        Title="Routines" Height="300" Width="300">
+        Title="Routines" Height="300" Width="300" ResizeMode="NoResize">
     <Window.DataContext>
         <localVM:RoutineListViewModel/>
     </Window.DataContext>
@@ -20,11 +20,19 @@
             </Button>
         </DockPanel>
         <DataGrid ItemsSource="{Binding Routines}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Routine_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Task"/>
-                <DataGridTextColumn Header="Start on every"/>
-                <DataGridTextColumn Header="Stage"/>
-                <DataGridTextColumn Header="Category"/>
+                <DataGridTextColumn Header="Task" Binding="{Binding Text}"/>
+                <DataGridTextColumn Header="Workload" Binding="{Binding Workload}"/>
+                <DataGridTextColumn Header="Starts on every" Binding="{Binding Repeated}"/>
+                <DataGridTextColumn Header="Due" Binding="{Binding DueShift}"/>
+                <DataGridTextColumn Header="Valid" Binding="{Binding ValidShift}"/>
+                <DataGridTextColumn Header="Stage" Binding="{Binding Stage}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

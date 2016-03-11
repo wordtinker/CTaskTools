@@ -153,7 +153,6 @@ namespace TaskTools.Data
 
         public override List<Routine> GetRoutines()
         {
-            // TODO test
             try
             {
                 IEnumerable<Routine> routines =
@@ -187,10 +186,28 @@ namespace TaskTools.Data
             }
         }
 
+        private XElement GetRoutineElementById(int id)
+        {
+            XElement selectedElem =
+                (from t in xDoc.Root.Element("Routines").Elements("Routine").Elements("Id")
+                 where t.Value == id.ToString()
+                 select t.Parent).FirstOrDefault();
+            return selectedElem;
+        }
+
         public override bool UpdateRoutine(Routine routine)
         {
-            // TODO
-            throw new NotImplementedException();
+            try
+            {
+                XElement selectedElem = GetRoutineElementById(routine.Id.GetValueOrDefault());
+                selectedElem.ReplaceWith(routine.ToXElement<Routine>());
+                xDoc.Save(fileName);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public override bool DeleteRoutine(Routine routine)

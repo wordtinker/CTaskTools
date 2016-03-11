@@ -30,9 +30,25 @@ namespace TaskTools.ViewModels
         public IEnumerable<RoutineViewModel> Routines {
             get
             {
-                // TODO
                 return TasksCore.Instance.Routines.Select(r => new RoutineViewModel(r));
             }
+        }
+
+        public void EditRoutine(RoutineViewModel routineVM)
+        {
+            // TODO Fix. MVVM break.
+            Views.RoutineWindow window = new Views.RoutineWindow();
+            window.DataContext = routineVM;
+            window.Show();
+        }
+
+        public RoutineListViewModel()
+        {
+            TasksCore.Instance.PropertyChanged += (sender, e) =>
+            {
+                // Raise every property
+                OnPropertyChanged(string.Empty);
+            };
         }
     }
 }
