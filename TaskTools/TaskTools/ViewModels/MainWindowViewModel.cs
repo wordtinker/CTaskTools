@@ -164,7 +164,10 @@ namespace TaskTools.ViewModels
                             core.DeleteTasksUpTo(yesterday);
                             break;
                     }
-                }));
+                }, (day) =>
+                {
+                    return !string.IsNullOrEmpty(OpenedFile);
+                }).ObservesProperty(() => OpenedFile));
             }
         }
 
@@ -177,7 +180,10 @@ namespace TaskTools.ViewModels
                 {
                     MessageBox.Show(string.Format("There are {0} finished tasks.",
                         core.FinishedPool.Count));
-                }));
+                }, () => 
+                {
+                    return !string.IsNullOrEmpty(OpenedFile);
+                }).ObservesProperty(() => OpenedFile));
             }
         }
 
@@ -189,7 +195,10 @@ namespace TaskTools.ViewModels
                 (showRoutineList = new DelegateCommand(() =>
                 {
                     windowFactory.CreateRoutineList();
-                }));
+                }, () => 
+                {
+                    return !string.IsNullOrEmpty(OpenedFile);
+                }).ObservesProperty(() => OpenedFile));
             }
         }
 
