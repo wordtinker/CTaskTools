@@ -61,7 +61,7 @@ namespace TaskTools.Data
             {
                 XDocument tree = new XDocument(
                     new XElement("Root",
-                        new XElement("LastId", 0),
+                        new XElement("TaskId", 0),
                         new XElement("RoutineId", 0),
                         new XElement("Tasks"),
                         new XElement("Routines")
@@ -82,7 +82,7 @@ namespace TaskTools.Data
             {
                 this.fileName = fileName;
                 xDoc = XDocument.Load(fileName);
-                lastId = int.Parse(xDoc.Root.Element("LastId").Value);
+                lastId = int.Parse(xDoc.Root.Element("TaskId").Value);
                 lastRoutineId = int.Parse(xDoc.Root.Element("RoutineId").Value);
                 return true;
             }
@@ -98,7 +98,7 @@ namespace TaskTools.Data
             {
                 lastId++;
                 newTask.Id = lastId;
-                xDoc.Root.Element("LastId").SetValue(lastId);
+                xDoc.Root.Element("TaskId").SetValue(lastId);
 
                 XElement elem = newTask.ToXElement<TDTask>();
                 xDoc.Root.Element("Tasks").Add(elem);
