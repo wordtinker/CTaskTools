@@ -6,20 +6,20 @@
         xmlns:local="clr-namespace:TaskTools.Views"
         xmlns:localVM="clr-namespace:TaskTools.ViewModels"
         mc:Ignorable="d"
-        Title="Routines" Height="300" Width="300" ResizeMode="NoResize">
+        Title="Routines" Height="300" Width="450">
     <Window.DataContext>
         <localVM:RoutineListViewModel/>
     </Window.DataContext>
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-            <Button DockPanel.Dock="Right" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
-                    Command="{Binding CreateRoutine}"
-                    Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter},
-                                 RelativeSource={RelativeSource Self}}">
-                <Image Source="..\Images\file+.png" Height="20" Width="20"/>
-            </Button>
-        </DockPanel>
-        <DataGrid ItemsSource="{Binding Routines}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+        <Button DockPanel.Dock="Top" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
+                HorizontalAlignment="Right"
+                Command="{Binding CreateRoutine}"
+                Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter},
+                                RelativeSource={RelativeSource Self}}">
+            <Image Source="..\Images\file+.png" Height="20" Width="20"/>
+        </Button>
+        <DataGrid ItemsSource="{Binding Routines}" AutoGenerateColumns="False" SelectionMode="Single"
+                  IsReadOnly="True" ColumnWidth="*" Margin="5">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="Routine_DoubleClick"/>

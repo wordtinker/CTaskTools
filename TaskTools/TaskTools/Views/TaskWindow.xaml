@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="Task" Height="450" Width="300" ResizeMode="NoResize"
         x:Name="Editor">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
     <DockPanel Margin="10">
         <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -14,34 +19,35 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0">Created:</TextBlock>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Incoming, StringFormat=d}"/>
             <TextBlock Grid.Row="1" Grid.Column="0">Start:</TextBlock>
-            <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Start}"/>
+            <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Start}" Height="25"/>
             <TextBlock Grid.Row="2" Grid.Column="0">Due:</TextBlock>
-            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Due}"/>
+            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Due}" Height="25"/>
             <TextBlock Grid.Row="3" Grid.Column="0">Valid till:</TextBlock>
-            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding ValidTill}"/>
+            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding ValidTill}" Height="25"/>
             <TextBlock Grid.Row="4" Grid.Column="0">Finished:</TextBlock>
-            <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Finish}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Finish, StringFormat=d}"/>
             <TextBlock Grid.Row="5" Grid.Column="0">Category:</TextBlock>
-            <ComboBox Grid.Row="5" Grid.Column="1" SelectedItem="{Binding Category}" ItemsSource="{Binding Categories}"/>
+            <ComboBox Grid.Row="5" Grid.Column="1" SelectedItem="{Binding Category}" ItemsSource="{Binding Categories}" Height="25"/>
             <TextBlock Grid.Row="6" Grid.Column="0">Stage:</TextBlock>
-            <ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding Stage}" ItemsSource="{Binding Stages}"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding Stage}" ItemsSource="{Binding Stages}" Height="25"/>
             <TextBlock Grid.Row="7" Grid.Column="0">Workload:</TextBlock>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Workload}"/>
-            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="OK" Command="{Binding UpdateTask}" Click="Close_OnClick"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Workload}" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center"
+                        Height="25">
+                <Button Content="OK" Command="{Binding UpdateTask}" Click="Close_OnClick" Padding="1" Margin="0,0,10,0"/>
                 <Button Content="Cancel" Click="Close_OnClick"/>
             </StackPanel>
         </Grid>

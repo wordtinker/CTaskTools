@@ -4,25 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskTools.Views"
-        mc:Ignorable="d"
-        Title="Routine" Height="300" Width="300">
-    <DockPanel>
+        mc:Ignorable="d" 
+        Title="Routine" Height="450" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel Margin="10">
         <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0">Workload:</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Workload}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Workload}" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="0">Category:</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Category}" ItemsSource="{Binding Categories}"/>
             <TextBlock Grid.Row="2" Grid.Column="0">Stage:</TextBlock>
@@ -30,11 +38,12 @@
             <TextBlock Grid.Row="3" Grid.Column="0">Repeat every:</TextBlock>
             <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Repeated}" ItemsSource="{Binding RepeatTypes}"/>
             <TextBlock Grid.Row="4" Grid.Column="0">Due:</TextBlock>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DueShift}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DueShift}" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="5" Grid.Column="0">Valid:</TextBlock>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ValidShift}"/>
-            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="OK" Command="{Binding UpdateRoutine}" Click="Close_OnClick"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ValidShift}" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center"
+                        Height="25">
+                <Button Content="OK" Command="{Binding UpdateRoutine}" Click="Close_OnClick" Margin="0,0,10,0"/>
                 <Button Content="Cancel" Click="Close_OnClick"/>
             </StackPanel>
         </Grid>
