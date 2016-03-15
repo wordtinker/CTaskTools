@@ -36,6 +36,8 @@ namespace TaskTools.Models
             {
                 // Clear Pool
                 Pool.Clear();
+                FinishedPool.Clear();
+                Routines.Clear();
                 // Set new storage and load tasks.
                 storage = value;
                 if (storage != null)
