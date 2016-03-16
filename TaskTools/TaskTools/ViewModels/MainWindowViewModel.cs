@@ -119,7 +119,9 @@ namespace TaskTools.ViewModels
                 return showHelp ??
                 (showHelp =new DelegateCommand(() =>
                 {
-                    // TODO !!!
+                    string info = string.Format("CTaskTools: {0}\n Iconset by Eleken.",
+                        CoreAssembly.Version);
+                    MessageBox.Show(info, "About");
                 }));
             }
         }
