@@ -25,7 +25,26 @@ namespace TaskTools.Models
         _8 = 108,
         _9 = 109,
         _10 = 110,
-        // TODO
+        _11 = 111,
+        _12 = 112,
+        _13 = 113,
+        _14 = 114,
+        _15 = 115,
+        _16 = 116,
+        _17 = 117,
+        _18 = 118,
+        _19 = 119,
+        _20 = 120,
+        _21 = 121,
+        _22 = 122,
+        _23 = 123,
+        _24 = 124,
+        _25 = 125,
+        _26 = 126,
+        _27 = 127,
+        _28 = 128,
+        _29 = 129,
+        _30 = 130, 
         _31 = 131
     }
 
@@ -39,7 +58,7 @@ namespace TaskTools.Models
         public RepeatType Repeated { get; set; }
         public int DueShift { get; set; }
         public int ValidShift { get; set; }
-        public DateTime LastGenerated { get; set; }
+        public DateTime? LastGenerated { get; set; }
 
         internal void Update()
         {
@@ -55,8 +74,9 @@ namespace TaskTools.Models
         {
             DateTime now = DateTime.Now;
             List<DateTime> plannedDates = new List<DateTime>();
+            DateTime lastGen = LastGenerated ?? now.AddDays(-1);
 
-            for (DateTime date = LastGenerated.AddDays(1); date <= now; date = date.AddDays(1))
+            for (DateTime date = lastGen.AddDays(1); date <= now; date = date.AddDays(1))
             {
                 if (Repeated >= RepeatType.Sunday && Repeated <= RepeatType.Saturday)
                 {
@@ -64,20 +84,24 @@ namespace TaskTools.Models
                     {
                         plannedDates.Add(date);
                     }
-                    // TODO test
                 }
                 else if (Repeated == RepeatType.Day)
                 {
                     plannedDates.Add(date);
-                    // TODO test
                 }
                 else if (Repeated == RepeatType.LastDay)
                 {
-                    // TODO
+                    if (date.Day == DateTime.DaysInMonth(date.Year, date.Month))
+                    {
+                        plannedDates.Add(date);
+                    }
                 }
                 else // days of month
                 {
-                    // TODO
+                    if (date.Day == (int)Repeated - 100)
+                    {
+                        plannedDates.Add(date);
+                    }
                 }
             }
 
@@ -99,6 +123,9 @@ namespace TaskTools.Models
                 ValidTill = taskDate.AddDays(ValidShift)
             };
             task.Update();
+
+            LastGenerated = taskDate;
+            Update();
         }
     }
 }

@@ -22,7 +22,6 @@ namespace TaskTools.ViewModels
                     Views.RoutineWindow window = new Views.RoutineWindow();
                     window.DataContext = new RoutineViewModel();
                     window.Show();
-                    // TODO CanExecute opened file
                 }));
             }
         }

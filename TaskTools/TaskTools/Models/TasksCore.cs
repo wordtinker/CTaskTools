@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TaskTools.Data;
 using System;
 using System.Linq;
+using System.Timers;
 
 namespace TaskTools.Models
 {
@@ -144,11 +145,26 @@ namespace TaskTools.Models
             }
         }
 
+        private void GenerateTasksFromRoutines(object sender, ElapsedEventArgs e)
+        {
+            if (storage == null) return;
+
+            foreach (Routine routine in Routines)
+            {
+                routine.Evaluate();
+            }
+        }
+
         private TasksCore()
         {
             Pool = new List<TDTask>();
             FinishedPool = new List<TDTask>();
             Routines = new List<Routine>();
+
+            Timer routineTimer = new Timer(1000 * 60);
+            routineTimer.Enabled = true;
+            routineTimer.Elapsed += GenerateTasksFromRoutines;
+            routineTimer.Start();
         }
     }
 }
