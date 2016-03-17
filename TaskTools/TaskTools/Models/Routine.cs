@@ -14,7 +14,6 @@ namespace TaskTools.Models
         Friday = DayOfWeek.Friday, //5
         Saturday = DayOfWeek.Saturday, // 6
         Day = 7,
-        FirstDay = 101,
         _1 = 101,
         _2 = 102,
         _3 = 103,
@@ -76,7 +75,7 @@ namespace TaskTools.Models
             List<DateTime> plannedDates = new List<DateTime>();
             DateTime lastGen = LastGenerated ?? now.AddDays(-1);
 
-            for (DateTime date = lastGen.AddDays(1); date <= now; date = date.AddDays(1))
+            for (DateTime date = lastGen.AddDays(1).Date; date <= now.Date; date = date.AddDays(1).Date)
             {
                 if (Repeated >= RepeatType.Sunday && Repeated <= RepeatType.Saturday)
                 {
