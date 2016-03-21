@@ -34,13 +34,13 @@
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Workload}" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="0">Category:</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Category}"
-                      ItemsSource="{Binding Source={local:EnumBindingSource {x:Type shared:Category}}}"/>
+                      ItemsSource="{Binding Source={shared:EnumBindingSource {x:Type shared:Category}}}"/>
             <TextBlock Grid.Row="2" Grid.Column="0">Stage:</TextBlock>
             <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Stage}"
-                      ItemsSource="{Binding Source={local:EnumBindingSource {x:Type shared:Stage}}}"/>
+                      ItemsSource="{Binding Source={shared:EnumBindingSource {x:Type shared:Stage}}}"/>
             <TextBlock Grid.Row="3" Grid.Column="0">Repeat every:</TextBlock>
             <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Repeated}"
-                      ItemsSource="{Binding Source={local:EnumBindingSource {x:Type shared:RepeatType}}}"/>
+                      ItemsSource="{Binding Source={shared:EnumBindingSource {x:Type shared:RepeatType}}}"/>
             <TextBlock Grid.Row="4" Grid.Column="0">Due:</TextBlock>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DueShift}" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="5" Grid.Column="0">Valid:</TextBlock>
