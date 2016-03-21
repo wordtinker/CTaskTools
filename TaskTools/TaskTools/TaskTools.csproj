@@ -62,9 +62,11 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Models\Routine.cs" />
+    <Compile Include="Shared\Enumerations.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\RoutineListViewModel.cs" />
     <Compile Include="ViewModels\RoutineViewModel.cs" />
+    <Compile Include="Views\EnumExtensions.cs" />
     <Compile Include="Views\RoutineList.xaml.cs">
       <DependentUpon>RoutineList.xaml</DependentUpon>
     </Compile>

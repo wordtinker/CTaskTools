@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using TaskTools.Models;
+using TaskTools.Shared;
 
 namespace TaskTools.ViewModels
 {
@@ -20,33 +21,6 @@ namespace TaskTools.ViewModels
         public RepeatType Repeated { get; set; }
         public int DueShift { get; set; }
         public int ValidShift { get; set; }
-
-        public IEnumerable<Category> Categories
-        {
-            get
-            {
-                // TODO fix
-                return Enum.GetValues(typeof(Category)).Cast<Category>();
-            }
-        }
-
-        public IEnumerable<Stage> Stages
-        {
-            get
-            {
-                // TODO fix
-                return Enum.GetValues(typeof(Stage)).Cast<Stage>();
-            }
-        }
-
-        public IEnumerable<RepeatType> RepeatTypes
-        {
-            get
-            {
-                // TODO fix
-                return Enum.GetValues(typeof(RepeatType)).Cast<RepeatType>();
-            }
-        }
 
         public ICommand UpdateRoutine
         {

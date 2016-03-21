@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using TaskTools.Models;
+using TaskTools.Shared;
 
 namespace TaskTools.ViewModels
 {
@@ -27,24 +28,6 @@ namespace TaskTools.ViewModels
         public Stage Stage { get; set; }
         public bool Routine { get; set; }
         public int Workload { get; set; }
-
-        public IEnumerable<Category> Categories
-        {
-            get
-            {
-                // TODO fix
-                return Enum.GetValues(typeof(Category)).Cast<Category>();
-            }
-        }
-
-        public IEnumerable<Stage> Stages
-        {
-            get
-            {
-                // TODO fix
-                return Enum.GetValues(typeof(Stage)).Cast<Stage>();
-            }
-        }
 
         public ICommand UpdateTask
         {

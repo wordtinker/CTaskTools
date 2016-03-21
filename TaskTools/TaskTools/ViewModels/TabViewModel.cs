@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Prism.Mvvm;
 using TaskTools.Models;
+using TaskTools.Shared;
 
 namespace TaskTools.ViewModels
 {

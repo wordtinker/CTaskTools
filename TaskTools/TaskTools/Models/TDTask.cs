@@ -1,27 +1,8 @@
 ﻿using System;
+using TaskTools.Shared;
 
 namespace TaskTools.Models
 {
-    public enum Category
-    {
-        Money,
-        Health,
-        Business,
-        Fun,
-        FriendsFamily,
-        SelfDevelopment,
-        Environment
-    }
-
-    public enum Stage
-    {
-        Incoming,
-        Someday,
-        Waiting,
-        Backlog,
-        Today
-    }
-
     public class TDTask
     {
         public int? Id { get; set; }

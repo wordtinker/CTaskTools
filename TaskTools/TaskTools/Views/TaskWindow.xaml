@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskTools.Views"
+        xmlns:shared="clr-namespace:TaskTools.Shared"
         mc:Ignorable="d"
         Title="Task" Height="450" Width="300" ResizeMode="NoResize"
         x:Name="Editor">
@@ -40,9 +41,13 @@
             <TextBlock Grid.Row="4" Grid.Column="0">Finished:</TextBlock>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Finish, StringFormat=d}"/>
             <TextBlock Grid.Row="5" Grid.Column="0">Category:</TextBlock>
-            <ComboBox Grid.Row="5" Grid.Column="1" SelectedItem="{Binding Category}" ItemsSource="{Binding Categories}" Height="25"/>
+            <ComboBox Grid.Row="5" Grid.Column="1" SelectedItem="{Binding Category}"
+                      ItemsSource="{Binding Source={local:EnumBindingSource {x:Type shared:Category}}}"
+                      Height="25"/>
             <TextBlock Grid.Row="6" Grid.Column="0">Stage:</TextBlock>
-            <ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding Stage}" ItemsSource="{Binding Stages}" Height="25"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding Stage}"
+                      ItemsSource="{Binding Source={local:EnumBindingSource {x:Type shared:Stage}}}"
+                      Height="25"/>
             <TextBlock Grid.Row="7" Grid.Column="0">Workload:</TextBlock>
             <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Workload}" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center"
