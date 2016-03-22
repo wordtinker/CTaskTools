@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskTools.Shared;
+using Shared;
 
 namespace TaskTools.Models
 {

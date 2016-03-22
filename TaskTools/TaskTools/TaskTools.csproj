@@ -62,11 +62,9 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Models\Routine.cs" />
-    <Compile Include="Shared\Enumerations.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\RoutineListViewModel.cs" />
     <Compile Include="ViewModels\RoutineViewModel.cs" />
-    <Compile Include="Shared\EnumExtensions.cs" />
     <Compile Include="Views\RoutineList.xaml.cs">
       <DependentUpon>RoutineList.xaml</DependentUpon>
     </Compile>
@@ -143,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\checkboxes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{384e9c28-7504-4f76-9f14-9d96368a84c5}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

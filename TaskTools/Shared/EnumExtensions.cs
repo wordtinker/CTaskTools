@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Markup;
 
-namespace TaskTools.Shared
+namespace Shared
 {
     public class EnumDescriptionTypeConverter : EnumConverter
     {
@@ -98,3 +98,4 @@ namespace TaskTools.Shared
         }
     }
 }
+

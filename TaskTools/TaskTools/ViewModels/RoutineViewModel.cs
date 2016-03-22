@@ -1,10 +1,7 @@
 ﻿using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using TaskTools.Models;
-using TaskTools.Shared;
+using Shared;
 
 namespace TaskTools.ViewModels
 {

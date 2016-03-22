@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using TaskTools.Properties;
+using Shared.Properties;
 
-namespace TaskTools.Shared
+namespace Shared
 {
     public enum Category
     {

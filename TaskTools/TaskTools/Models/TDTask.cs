@@ -1,5 +1,5 @@
 ﻿using System;
-using TaskTools.Shared;
+using Shared;
 
 namespace TaskTools.Models
 {
