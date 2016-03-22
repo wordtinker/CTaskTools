@@ -16,17 +16,17 @@ namespace TaskTools.Models
         public int ValidShift { get; set; }
         public DateTime? LastGenerated { get; set; }
 
-        internal void Update()
+        public void Update()
         {
             TasksCore.Instance.UpdateRoutine(this);
         }
 
-        internal void Delete()
+        public void Delete()
         {
             TasksCore.Instance.DeleteRoutine(this);
         }
 
-        public void Evaluate()
+        internal void Evaluate()
         {
             DateTime now = DateTime.Now;
             List<DateTime> plannedDates = new List<DateTime>();

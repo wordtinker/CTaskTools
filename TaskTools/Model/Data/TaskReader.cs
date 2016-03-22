@@ -3,7 +3,7 @@ using TaskTools.Models;
 
 namespace TaskTools.Data
 {
-    abstract class TaskReader
+    public abstract class TaskReader
     {
         public abstract string Extension { get; }
 

@@ -61,7 +61,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
-    <Compile Include="Models\Routine.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\RoutineListViewModel.cs" />
     <Compile Include="ViewModels\RoutineViewModel.cs" />
@@ -83,12 +82,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\TaskReader.cs" />
-    <Compile Include="Data\XMLExtensions.cs" />
-    <Compile Include="Data\XMLTaskReader.cs" />
-    <Compile Include="Models\TDTask.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Models\TasksCore.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="ViewModels\TDTaskViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -143,6 +137,10 @@
     <Resource Include="Images\checkboxes.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Models.csproj">
+      <Project>{78b86ca3-f318-40a8-b8fa-5a2b8ace4028}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{384e9c28-7504-4f76-9f14-9d96368a84c5}</Project>
       <Name>Shared</Name>

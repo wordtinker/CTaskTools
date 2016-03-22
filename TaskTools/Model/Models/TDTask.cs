@@ -18,12 +18,12 @@ namespace TaskTools.Models
         public bool Routine { get; set; }
         public int Workload { get; set; }
 
-        internal void Update()
+        public void Update()
         {
             TasksCore.Instance.UpdateTask(this);
         }
 
-        internal void Delete()
+        public void Delete()
         {
             TasksCore.Instance.DeleteTask(this);
         }

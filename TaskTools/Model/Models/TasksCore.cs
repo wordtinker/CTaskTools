@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace TaskTools.Models
 {
-    class TasksCore : BindableBase
+    public class TasksCore : BindableBase
     {
 
         private static readonly TasksCore instance = new TasksCore();
@@ -94,7 +94,7 @@ namespace TaskTools.Models
             }
         }
 
-        internal void DeleteTasksUpTo(DateTime day)
+        public void DeleteTasksUpTo(DateTime day)
         {
             if (storage == null) return;
 

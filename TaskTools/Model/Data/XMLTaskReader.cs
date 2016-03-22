@@ -6,7 +6,7 @@ using TaskTools.Models;
 
 namespace TaskTools.Data
 {
-    class XMLTaskReader : TaskReader
+    public class XMLTaskReader : TaskReader
     {
         private string fileName;
         private XDocument xDoc;
