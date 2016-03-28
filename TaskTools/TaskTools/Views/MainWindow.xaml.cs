@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using TaskTools.ViewModels;
+using TaskTools.Views;
 
 namespace TaskTools
 {

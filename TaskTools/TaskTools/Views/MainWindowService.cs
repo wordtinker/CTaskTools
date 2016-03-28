@@ -3,7 +3,7 @@ using System.Windows;
 using TaskTools.ViewModels;
 using TaskTools.Views;
 
-namespace TaskTools
+namespace TaskTools.Views
 {
     class MainWindowService : IUIMainWindowService
     {

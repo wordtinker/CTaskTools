@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10BE16DD-0D61-4911-A1DC-8DC0770B66A3}</ProjectGuid>
+    <ProjectGuid>{F1A591DC-A6C4-4FC7-BB1F-B8D5955417E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaskTools</RootNamespace>
-    <AssemblyName>TaskTools</AssemblyName>
+    <RootNamespace>ViewModels</RootNamespace>
+    <AssemblyName>ViewModels</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,7 +40,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,19 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Config.cs" />
-    <Compile Include="Views\RoutineList.xaml.cs">
-      <DependentUpon>RoutineList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RoutineListService.cs" />
-    <Compile Include="Views\RoutineWindow.xaml.cs">
-      <DependentUpon>RoutineWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TaskWindow.xaml.cs">
-      <DependentUpon>TaskWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindowService.cs" />
-    <Page Include="Views\MainWindow.xaml">
+    <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RoutineListViewModel.cs" />
+    <Compile Include="ViewModels\RoutineViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModel.cs" />
+    <Compile Include="ViewModels\TDTaskViewModel.cs" />
+    <Compile Include="ViewModels\UIInterfaces.cs" />
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -80,22 +74,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RoutineList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RoutineWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TaskWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,19 +108,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\file+.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\checkboxes.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Model\Models.csproj">
+      <Project>{78b86ca3-f318-40a8-b8fa-5a2b8ace4028}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{384e9c28-7504-4f76-9f14-9d96368a84c5}</Project>
       <Name>Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
-      <Project>{f1a591dc-a6c4-4fc7-bb1f-b8d5955417e6}</Project>
-      <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,7 +20,7 @@ namespace TaskTools.Views
         public void CreateEditor(RoutineViewModel routine)
         {
             RoutineWindow window = new RoutineWindow();
-            window.DataContext = new RoutineViewModel(routine);
+            window.DataContext = routine;
             window.Owner = routineListWindow;
             window.Show();
         }

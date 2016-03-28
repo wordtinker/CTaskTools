@@ -1,6 +1,6 @@
 ﻿namespace TaskTools.ViewModels
 {
-    interface IUIMainWindowService
+    public interface IUIMainWindowService
     {
         void CreateEditor();
         void CreateEditor(TDTaskViewModel taskVM);
@@ -13,7 +13,7 @@
         void Shutdown();
     }
 
-    interface IUIRoutineListService
+    public interface IUIRoutineListService
     {
         void CreateEditor();
         void CreateEditor(RoutineViewModel routine);

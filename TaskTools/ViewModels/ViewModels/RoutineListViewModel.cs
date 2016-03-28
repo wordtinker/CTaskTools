@@ -7,7 +7,7 @@ using TaskTools.Models;
 
 namespace TaskTools.ViewModels
 {
-    class RoutineListViewModel : BindableBase
+    public class RoutineListViewModel : BindableBase
     {
         private ICommand createRoutine;
         private IUIRoutineListService windowService;
@@ -33,6 +33,7 @@ namespace TaskTools.ViewModels
 
         public void EditRoutine(RoutineViewModel routineVM)
         {
+            // TODO
             windowService.CreateEditor(routineVM);
         }
 

@@ -8,7 +8,7 @@ using TaskTools.Models;
 
 namespace TaskTools.ViewModels
 {
-    class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : BindableBase
     {
         private IUIMainWindowService windowService;
         private TasksCore core;

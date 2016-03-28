@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace TaskTools
+namespace TaskTools.ViewModels
 {
     public static class CoreAssembly
     {

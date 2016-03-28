@@ -7,7 +7,7 @@ using Shared;
 
 namespace TaskTools.ViewModels
 {
-    abstract class TaskPanel: BindableBase
+    public abstract class TaskPanel: BindableBase
     {
         protected TasksCore core;
 

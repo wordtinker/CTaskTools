@@ -5,7 +5,7 @@ using Shared;
 
 namespace TaskTools.ViewModels
 {
-    class RoutineViewModel
+    public class RoutineViewModel
     {
         private Routine routine;
         private ICommand updateRoutine;
