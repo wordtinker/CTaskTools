@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using TaskTools.ViewModels;
-using TaskTools.Views;
 
 namespace TaskTools.Views
 {

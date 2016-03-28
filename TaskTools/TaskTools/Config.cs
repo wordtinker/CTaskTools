@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace TaskTools
+namespace TaskTools.Views
 {
     static class Config
     {
