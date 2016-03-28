@@ -137,7 +137,7 @@
       <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
-      <Project>{f1a591dc-a6c4-4fc7-bb1f-b8d5955417e6}</Project>
+      <Project>{60962742-2bda-44dd-9622-0b45aa3b1dd5}</Project>
       <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
