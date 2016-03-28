@@ -7,9 +7,6 @@
         xmlns:localVM="clr-namespace:TaskTools.ViewModels"
         mc:Ignorable="d"
         Title="Routines" Height="300" Width="450">
-    <Window.DataContext>
-        <localVM:RoutineListViewModel/>
-    </Window.DataContext>
     <DockPanel>
         <Button DockPanel.Dock="Top" Background="Transparent" BorderThickness="0" Margin="0,0,10,0"
                 HorizontalAlignment="Right"

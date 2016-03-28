@@ -1,9 +1,7 @@
-﻿using Microsoft.Win32;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
 using TaskTools.Data;
 using TaskTools.Models;
@@ -12,7 +10,7 @@ namespace TaskTools.ViewModels
 {
     class MainWindowViewModel : BindableBase
     {
-        private IWindowFactory windowFactory;
+        private IUIMainWindowService windowService;
         private TasksCore core;
         private string openedFile;
         private ICommand createFile;
@@ -43,12 +41,9 @@ namespace TaskTools.ViewModels
                 (createFile = new DelegateCommand(() =>
                 {
                     TaskReader fileHandler = new XMLTaskReader();
-
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = fileHandler.Extension;
-                    if (saveFileDialog.ShowDialog() == true)
+                    string fileName = windowService.SaveFileDialog(fileHandler.Extension);
+                    if (fileName != null)
                     {
-                        string fileName = saveFileDialog.FileName;
                         if (fileHandler.InitializeFile(fileName) &&
                             fileHandler.LoadFile(fileName))
                         {
@@ -57,7 +52,7 @@ namespace TaskTools.ViewModels
                         }
                         else
                         {
-                            MessageBox.Show("Can't create file.");
+                            windowService.ShowMessage("Can't create file.");
                         }
                     }
                 }));
@@ -71,19 +66,17 @@ namespace TaskTools.ViewModels
                 (openFile = new DelegateCommand(() =>
                 {
                     TaskReader fileHandler = new XMLTaskReader();
-
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = fileHandler.Extension;
-                    if (openFileDialog.ShowDialog() == true)
+                    string fileName = windowService.OpenFileDialog(fileHandler.Extension);
+                    if (fileName != null)
                     {
-                        if (fileHandler.LoadFile(openFileDialog.FileName))
+                        if (fileHandler.LoadFile(fileName))
                         {
-                            SaveLastOpenedFile(openFileDialog.FileName);
+                            SaveLastOpenedFile(fileName);
                             core.Storage = fileHandler;
                         }
                         else
                         {
-                            MessageBox.Show("Can't open file.");
+                            windowService.ShowMessage("Can't open file.");
                         }
                     }
                 }));
@@ -101,6 +94,7 @@ namespace TaskTools.ViewModels
                 }));
             }
         }
+
         public ICommand Exit
         {
             get
@@ -108,10 +102,11 @@ namespace TaskTools.ViewModels
                 return exit ??
                 (exit =  new DelegateCommand(() =>
                 {
-                    App.Current.Shutdown();
+                    windowService.Shutdown();
                 }));
             }
         }
+
         public ICommand ShowHelp
         {
             get
@@ -121,7 +116,7 @@ namespace TaskTools.ViewModels
                 {
                     string info = string.Format("CTaskTools: {0}\n Iconset by Eleken.",
                         CoreAssembly.Version);
-                    MessageBox.Show(info, "About");
+                    windowService.ShowMessage(info);
                 }));
             }
         }
@@ -133,7 +128,7 @@ namespace TaskTools.ViewModels
                 return createTask ??
                 (createTask = new DelegateCommand(() =>
                 {
-                    windowFactory.CreateEditor();
+                    windowService.CreateEditor();
                 }, () =>
                 {
                     return !string.IsNullOrEmpty(OpenedFile);
@@ -180,7 +175,7 @@ namespace TaskTools.ViewModels
                 return showFinished ??
                 (showFinished = new DelegateCommand(() =>
                 {
-                    MessageBox.Show(string.Format("There are {0} finished tasks.",
+                    windowService.ShowMessage(string.Format("There are {0} finished tasks.",
                         core.FinishedPool.Count));
                 }, () => 
                 {
@@ -196,7 +191,7 @@ namespace TaskTools.ViewModels
                 return showRoutineList ??
                 (showRoutineList = new DelegateCommand(() =>
                 {
-                    windowFactory.CreateRoutineList();
+                    windowService.CreateRoutineList();
                 }, () => 
                 {
                     return !string.IsNullOrEmpty(OpenedFile);
@@ -206,12 +201,12 @@ namespace TaskTools.ViewModels
 
         public void EditTask(TDTaskViewModel taskViewModel)
         {
-            windowFactory.CreateEditor(new TDTaskViewModel(taskViewModel));
+            windowService.CreateEditor(new TDTaskViewModel(taskViewModel));
         }
 
         public void LoadLastOpenedFile()
         {
-            string fileName = Config.ReadSetting("LastFile");
+            string fileName = windowService.GetConfig("LastFile");
             if (fileName != string.Empty)
             {
                 TaskReader fileHandler = new XMLTaskReader();
@@ -226,12 +221,12 @@ namespace TaskTools.ViewModels
         public void SaveLastOpenedFile(string fileName)
         {
             OpenedFile = fileName;
-            Config.AddUpdateConfig("LastFile", fileName);
+            windowService.SetConfig("LastFile", fileName);
         }
 
-        public MainWindowViewModel(IWindowFactory windowFactory)
+        public MainWindowViewModel(IUIMainWindowService windowService)
         {
-            this.windowFactory = windowFactory;
+            this.windowService = windowService;
             core = TasksCore.Instance;
             Tabs = new List<TaskPanel>
             {

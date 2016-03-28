@@ -11,6 +11,8 @@ namespace TaskTools.Views
     {
         public RoutineList()
         {
+            RoutineListService service = new RoutineListService(this);
+            this.DataContext = new RoutineListViewModel(service);
             InitializeComponent();
         }
 

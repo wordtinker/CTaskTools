@@ -10,6 +10,7 @@ namespace TaskTools.ViewModels
     class RoutineListViewModel : BindableBase
     {
         private ICommand createRoutine;
+        private IUIRoutineListService windowService;
 
         public ICommand CreateRoutine
         {
@@ -18,10 +19,7 @@ namespace TaskTools.ViewModels
                 return createRoutine ??
                 (createRoutine = new DelegateCommand(() =>
                 {
-                    // TODO Fix. MVVM break.
-                    Views.RoutineWindow window = new Views.RoutineWindow();
-                    window.DataContext = new RoutineViewModel();
-                    window.Show();
+                    windowService.CreateEditor();
                 }));
             }
         }
@@ -35,14 +33,12 @@ namespace TaskTools.ViewModels
 
         public void EditRoutine(RoutineViewModel routineVM)
         {
-            // TODO Fix. MVVM break.
-            Views.RoutineWindow window = new Views.RoutineWindow();
-            window.DataContext = new RoutineViewModel(routineVM);
-            window.Show();
+            windowService.CreateEditor(routineVM);
         }
 
-        public RoutineListViewModel()
+        public RoutineListViewModel(IUIRoutineListService windowService)
         {
+            this.windowService = windowService;
             TasksCore.Instance.PropertyChanged += (sender, e) =>
             {
                 // Raise every property

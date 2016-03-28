@@ -64,16 +64,18 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\RoutineListViewModel.cs" />
     <Compile Include="ViewModels\RoutineViewModel.cs" />
+    <Compile Include="ViewModels\UIInterfaces.cs" />
     <Compile Include="Views\RoutineList.xaml.cs">
       <DependentUpon>RoutineList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RoutineListService.cs" />
     <Compile Include="Views\RoutineWindow.xaml.cs">
       <DependentUpon>RoutineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TaskWindow.xaml.cs">
       <DependentUpon>TaskWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowFactory.cs" />
+    <Compile Include="Views\MainWindowService.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

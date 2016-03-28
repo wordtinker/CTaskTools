@@ -28,8 +28,8 @@ namespace TaskTools
     {
         public MainWindow()
         {
-            WindowFactory factory = new WindowFactory(this);
-            this.DataContext = new MainWindowViewModel(factory);
+            MainWindowService service = new MainWindowService(this);
+            this.DataContext = new MainWindowViewModel(service);
             InitializeComponent();
         }
 
