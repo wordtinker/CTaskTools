@@ -33,8 +33,7 @@ namespace TaskTools.ViewModels
 
         public void EditRoutine(RoutineViewModel routineVM)
         {
-            // TODO
-            windowService.CreateEditor(routineVM);
+            windowService.CreateEditor(new RoutineViewModel(routineVM));
         }
 
         public RoutineListViewModel(IUIRoutineListService windowService)
